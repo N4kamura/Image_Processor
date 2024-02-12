@@ -29,8 +29,8 @@ class ImageProcessor(QMainWindow):
 
         lower_bound = specific_color - threshold
         upper_bound = specific_color + threshold
-        mask = cv2.inRange(image, lower_bound, upper_bound)
 
+        mask = cv2.inRange(image, lower_bound, upper_bound)
         inverse_mask = cv2.bitwise_not(mask)
         result = cv2.bitwise_and(image, image, mask= inverse_mask)
 
