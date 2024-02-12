@@ -5,8 +5,8 @@ def image_contours(image_path):
 
     path = image_path
 
-    threshold = 9
-    specific_color = np.array([238,255,255])
+    threshold = 99
+    specific_color = np.array([255,141,123])
 
     image = cv2.imread(path)
 
@@ -22,13 +22,15 @@ def image_contours(image_path):
 
     gray_image = cv2.cvtColor(result, cv2.COLOR_BGR2GRAY)
 
-    _, threshold_image = cv2.threshold(gray_image, 127, 255, cv2.THRESH_BINARY)
+    _, binary_image = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY)
 
     kernel = np.ones((5,5),np.uint8)
-    eroded_image = cv2.erode(threshold_image, kernel, iterations=3) #Yo deducí que eran 3
-    dilated_image = cv2.dilate(eroded_image, kernel, iterations=3) #Yo deducí que eran 3
+    dilated_image1 = cv2.dilate(binary_image, kernel, iterations= 1)
+    eroded_image1 = cv2.erode(dilated_image1, kernel, iterations=1)
+    dilated_image2 = cv2.dilate(eroded_image1, kernel, iterations=5)
+    eroded_image2 = cv2.erode(dilated_image2, kernel, iterations=1)
 
-    inverted_image = cv2.bitwise_not(dilated_image)
+    inverted_image = cv2.bitwise_not(eroded_image2) #¿Es así?
 
     contours, _ = cv2.findContours(inverted_image,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
 
