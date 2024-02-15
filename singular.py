@@ -36,6 +36,7 @@ def main():
     coordinates = [(-12.064110, -77.015226, 0)]
     ZOOM = 15
     X, Y = getXY(coordinates[0][0], coordinates[0][1], ZOOM)
+    print(X,Y)
     url = f"https://mt3.google.com/vt/lyrs=m&x={X}&y={Y}&z={ZOOM}&hl=en"
     print(url)
     """ contornos = image_contours("TEST_ZOOM-15.png")

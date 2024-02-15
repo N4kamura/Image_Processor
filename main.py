@@ -5,7 +5,6 @@ import xml.etree.ElementTree as ET
 from shapely.geometry import Polygon
 import numpy as np
 from images import image_contours
-from kml import create_kml
 import shutil
 import time
 
@@ -114,7 +113,7 @@ def operator(path) -> None:
                 contorno_float64 = np.vstack([contorno_float64,[primer_elemento]])
                 coordenadas_str = ' '.join([f"{coord[0][0]},{coord[0][1]},0" for coord in contorno_float64])
                 name = f"Foto-{count}-{l}"
-                create_kml(coordenadas_str,name,name_kml[:-4])
+                #create_kml(coordenadas_str,name,name_kml[:-4])
             count += 1
     shutil.rmtree(f"Output/{name_kml[:-4]}/Fotografias")
 
